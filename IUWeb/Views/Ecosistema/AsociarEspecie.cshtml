@@ -1,0 +1,81 @@
+﻿@model IEnumerable<EcoMarino.LogicaAplicacion.DTOs.EspecieDTO>
+
+@{
+    ViewData["Title"] = "AsociarEspecie";
+}
+
+<h1>AsociarEspecie</h1>
+
+@if (ViewBag.msg != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.msg
+    </div>
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombreCientifico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idEstado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nivelConservacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreCientifico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idEstado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nivelConservacion)
+                    </td>
+                    <td>
+                        <form method="post">
+                            <input value="@ViewBag.idEcosistema" name="idEco" hidden />
+                            <input value="@item.id" name="idEsp" hidden />
+
+                            <input type="submit" value="Asociar" class="btn btn-primary" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

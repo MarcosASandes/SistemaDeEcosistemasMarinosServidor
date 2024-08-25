@@ -1,0 +1,77 @@
+﻿@using EcoMarino.Entidades;
+@using EcoMarino.LogicaAplicacion.DTOs;
+@model EcoMarino.LogicaAplicacion.DTOs.EcosistemaDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+@if (ViewBag.msg != null)
+{
+    <div class="alert alert-danger">@ViewBag.msg</div>
+}
+
+<h4>Ecosistema</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nombre" class="control-label"></label>
+                <input asp-for="nombre" class="form-control" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label"></label>
+                <input asp-for="descripcion" class="form-control" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nivelConservacion" class="control-label">Nivel de conservacion: </label>
+                <input asp-for="nivelConservacion" type="number" class="form-control" />
+                <span asp-validation-for="nivelConservacion" class="text-danger"></span>
+                <div class="form-group">
+                    
+                    <input type="file" accept=".png, .jpg, .jpeg" name="imagen" class="form-control" required />
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Latitud</label>
+                <input name="lat" type="number" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Longitud</label>
+                <input name="lon" type="number" required class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Pais responsable: </label>
+                <select class="form-control" name="paisSeleccionado">
+                    @if (ViewBag.Paises != null)
+                    {
+                        @foreach (PaisDTO p in ViewBag.Paises)
+                        {
+                            <option value="@p.codigoAlpha">@p.nombre</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
